@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little Jasmine's Nook • 我的小世界</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: #fdfdfd;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* 顶部标题 */
+        header {
+            border: 1px solid #555;
+            padding: 26px;
+            text-align: center;
+            margin-bottom: 24px;
+            background: #f7f9fc;
+        }
+
+        header h1 {
+            font-size: 24px;
+            color: #222;
+        }
+
+        /* 布局：左 + 右 */
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* 左侧 */
+        .left {
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* 左侧上方小框 */
+        .avatar {
+            height: 180px;
+            border: 1px solid #555;
+            background: #f7f9fc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 左侧下方长框 */
+        .side-box {
+            flex: 1;
+            border: 1px solid #555;
+            padding: 20px;
+            background: #f7f9fc;
+        }
+
+        .side-box h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 6px;
+        }
+
+        .side-box p {
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+
+        /* 右侧主内容 */
+        .main {
+            flex: 1;
+            border: 1px solid #555;
+            padding: 30px;
+            background: #ffffff;
+        }
+
+        .main h2 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            border-left: 4px solid #777;
+            padding-left: 10px;
+        }
+
+        .main p {
+            line-height: 1.8;
+            margin-bottom: 14px;
+            font-size: 15px;
+        }
+
+        /* 手机适配 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .left {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Little Jasmine's Nook • 我的私人小筑</h1>
+    </header>
+
+    <div class="container">
+        <div class="left">
+            <!-- 左侧小框：头像/照片 -->
+            <div class="avatar">
+                我的照片 / 头像
+            </div>
+
+            <!-- 左侧长框：我的小标签 -->
+            <div class="side-box">
+                <h3>关于我</h3>
+                <p>喜欢安静</p>
+                <p>热爱收集美好</p>
+                <p>记录生活碎片</p>
+                <p>忠于自己的小世界</p>
+            </div>
+        </div>
+
+        <!-- 右侧主内容 -->
+        <div class="main">
+            <h2>✨ 我的爱好</h2>
+            <p>看书、听音乐、收集喜欢的事物、记录生活、发呆、感受温柔的小事。</p>
+
+            <h2>📦 我的收藏</h2>
+            <p>收藏句子、收藏画面、收藏回忆、收藏一切让我觉得温暖与治愈的东西。</p>
+
+            <h2>📝 值得记录的小事</h2>
+            <p>风很舒服的傍晚。</p>
+            <p>听到一首很喜欢的歌。</p>
+            <p>看到一段触动内心的文字。</p>
+            <p>安静地、认真地、为自己活一小会儿。</p>
+
+            <h2>🌙 我的小心情</h2>
+            <p>慢慢走，不必急。</p>
+            <p>认真生活，忠于自己。</p>
+            <p>在自己的小世界里，安静而闪亮。</p>
+        </div>
+    </div>
+
+</body>
+</html>
