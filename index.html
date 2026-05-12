@@ -111,7 +111,7 @@
 
         .book-content {
             display: none;
-            padding: 10px 0 50px;
+            padding: 10px 0 60px;
             margin-bottom: 30px;
             animation: openBook 0.4s ease;
         }
@@ -121,22 +121,21 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ✅ 手绘感鱼骨时间线 */
+        /* 手绘感鱼骨时间线 通用 */
         .fish-timeline {
             position: relative;
             width: 100%;
             max-width: 400px;
             margin: 0 auto;
-            padding: 30px 0;
+            padding: 30px 0 50px;
         }
 
-        /* 手绘波浪鱼身 */
         .fish-body {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
             width: 12px;
-            height: 400px;
+            height: 420px;
             background: repeating-linear-gradient(
                 180deg,
                 #1a73b9 0px,
@@ -147,7 +146,6 @@
             border-radius: 3px;
         }
 
-        /* 手绘鱼头 */
         .fish-head {
             position: absolute;
             top: -25px;
@@ -172,18 +170,31 @@
             border-radius: 50%;
         }
 
-        /* 手绘鱼尾 */
+        /* 镂空格栅/扫把三角 鱼尾 重点修改 */
         .fish-tail {
             position: absolute;
-            bottom: -25px;
+            bottom: -35px;
             left: 50%;
             transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-top: 25px solid transparent;
-            border-bottom: 25px solid transparent;
-            border-left: 45px solid #1a73b9;
+            width: 50px;
+            height: 60px;
+            background: transparent;
         }
+
+        .fish-tail span {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 30px;
+            background: #1a73b9;
+            transform-origin: top center;
+        }
+
+        .fish-tail span:nth-child(1) { transform: translateX(-50%) rotate(-30deg); }
+        .fish-tail span:nth-child(2) { transform: translateX(-50%) rotate(-15deg); }
+        .fish-tail span:nth-child(3) { transform: translateX(-50%) rotate(0deg); }
+        .fish-tail span:nth-child(4) { transform: translateX(-50%) rotate(15deg); }
+        .fish-tail span:nth-child(5) { transform: translateX(-50%) rotate(30deg); }
 
         /* 时间线节点 */
         .fish-item {
@@ -205,7 +216,6 @@
             padding-left: 25px;
         }
 
-        /* 手绘箭头 */
         .fish-item::after {
             content: "→";
             position: absolute;
@@ -258,7 +268,14 @@
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
-                    <div class="fish-tail"></div>
+                    <!-- 镂空扫把鱼尾 -->
+                    <div class="fish-tail">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                     <div class="fish-item left"><strong>📖 看书</strong><br>喜欢在文字里找安静</div>
                     <div class="fish-item right"><strong>🎵 听音乐</strong><br>耳机一戴，世界与我无关</div>
                     <div class="fish-item left"><strong>🎁 收集事物</strong><br>把喜欢的东西慢慢攒起来</div>
@@ -272,7 +289,13 @@
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
-                    <div class="fish-tail"></div>
+                    <div class="fish-tail">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                     <div class="fish-item left"><strong>📝 句子收藏</strong><br>看到就想抄下来的文字</div>
                     <div class="fish-item right"><strong>🖼️ 画面收藏</strong><br>截图里藏着的温柔瞬间</div>
                     <div class="fish-item left"><strong>📷 回忆收藏</strong><br>值得反复翻看的瞬间</div>
@@ -282,17 +305,39 @@
 
             <h2 onclick="toggleBook(this)">📝 值得记录的小事</h2>
             <div class="book-content">
-                <p>风很舒服的傍晚。</p>
-                <p>听到一首很喜欢的歌。</p>
-                <p>看到一段触动内心的文字。</p>
-                <p>安静地、认真地、为自己活一小会儿。</p>
+                <div class="fish-timeline">
+                    <div class="fish-head"></div>
+                    <div class="fish-body"></div>
+                    <div class="fish-tail">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="fish-item left"><strong>🌤️ 傍晚的风</strong><br>风很舒服的傍晚</div>
+                    <div class="fish-item right"><strong>🎶 喜欢的歌</strong><br>听到一首很喜欢的歌</div>
+                    <div class="fish-item left"><strong>📜 触动的文字</strong><br>看到一段触动内心的文字</div>
+                    <div class="fish-item right"><strong>🧘 独处的时光</strong><br>安静地、认真地、为自己活一小会儿</div>
+                </div>
             </div>
 
             <h2 onclick="toggleBook(this)">🌙 我的小心情</h2>
             <div class="book-content">
-                <p>慢慢走，不必急。</p>
-                <p>认真生活，忠于自己。</p>
-                <p>在自己的小世界里，安静而闪亮。</p>
+                <div class="fish-timeline">
+                    <div class="fish-head"></div>
+                    <div class="fish-body"></div>
+                    <div class="fish-tail">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="fish-item left"><strong>🚶 慢慢走</strong><br>慢慢走，不必急</div>
+                    <div class="fish-item right"><strong>❤️ 忠于自己</strong><br>认真生活，忠于自己</div>
+                    <div class="fish-item left"><strong>✨ 安静闪亮</strong><br>在自己的小世界里，安静而闪亮</div>
+                </div>
             </div>
         </div>
     </div>
