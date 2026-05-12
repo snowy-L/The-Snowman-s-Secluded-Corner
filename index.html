@@ -18,7 +18,6 @@
             padding: 20px;
         }
 
-        /* 顶部标题 */
         header {
             background: #ffffff;
             padding: 26px;
@@ -34,7 +33,6 @@
             font-weight: normal;
         }
 
-        /* 布局：左 + 右 */
         .container {
             display: flex;
             gap: 20px;
@@ -43,7 +41,6 @@
             flex-direction: row-reverse;
         }
 
-        /* 左侧（原右侧） */
         .left {
             width: 240px;
             display: flex;
@@ -51,7 +48,6 @@
             gap: 20px;
         }
 
-        /* 头像框 */
         .avatar {
             height: 180px;
             background: #fff;
@@ -66,7 +62,6 @@
             object-fit: cover;
         }
 
-        /* 关于我 */
         .side-box {
             flex: 1;
             background: #ffffff;
@@ -90,7 +85,6 @@
             color: #555;
         }
 
-        /* 右侧主内容（原左侧） */
         .main {
             flex: 1;
             background: #ffffff;
@@ -115,7 +109,6 @@
             padding-left: 14px;
         }
 
-        /* 翻书展开动画 */
         .book-content {
             display: none;
             padding: 10px 0;
@@ -124,17 +117,11 @@
         }
 
         @keyframes openBook {
-            from {
-                opacity: 0;
-                transform: translateY(-5px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 鱼骨时间线样式 */
+        /* ✅ 关键：鱼骨时间线样式 */
         .fish-timeline {
             position: relative;
             width: 100%;
@@ -143,7 +130,6 @@
             padding: 20px 0;
         }
 
-        /* 鱼身 */
         .fish-body {
             position: absolute;
             left: 50%;
@@ -160,7 +146,6 @@
             border-radius: 5px;
         }
 
-        /* 鱼头 */
         .fish-head {
             position: absolute;
             top: -20px;
@@ -185,7 +170,6 @@
             border-radius: 50%;
         }
 
-        /* 鱼尾 */
         .fish-tail {
             position: absolute;
             bottom: -20px;
@@ -198,7 +182,6 @@
             border-left: 35px solid #1a73b9;
         }
 
-        /* 时间线节点 */
         .fish-item {
             position: relative;
             margin: 40px 0;
@@ -207,43 +190,27 @@
             line-height: 1.6;
         }
 
-        /* 左边的内容 */
         .fish-item.left {
             left: 0;
             padding-right: 20px;
             text-align: right;
         }
 
-        /* 右边的内容 */
         .fish-item.right {
             left: 50%;
             padding-left: 20px;
         }
 
-        /* 手机适配 */
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column-reverse;
-            }
-            .left {
-                width: 100%;
-            }
-            .fish-item {
-                width: 100%;
-                text-align: left;
-                padding: 0 10px;
-            }
-            .fish-item.left, .fish-item.right {
-                left: 0;
-                padding: 0;
-                text-align: left;
-            }
+            .container { flex-direction: column-reverse; }
+            .left { width: 100%; }
+            .fish-item { width: 100%; text-align: left; padding: 0 10px; }
+            .fish-item.left, .fish-item.right { left: 0; padding: 0; text-align: left; }
         }
     </style>
 </head>
 
 <body>
-
     <header>
         <h1>雪人的世界</h1>
     </header>
@@ -253,79 +220,40 @@
             <div class="avatar">
                 <img src="Passport.jpg" alt="头像">
             </div>
-
             <div class="side-box">
-                <h3>我？</h3>
+                <h3>我?</h3>
                 <p>喜欢安静也喜欢热闹</p>
                 <p>不显眼的二刺猿</p>
                 <p>加载中...</p>
-                <p>热爱一切美好</p></p>
+                <p>热爱一切美好</p>
             </div>
         </div>
 
         <div class="main">
-            <!-- 爱好鱼骨时间线 -->
             <h2 onclick="toggleBook(this)">✨ 我的爱好</h2>
             <div class="book-content">
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
                     <div class="fish-tail"></div>
-
-                    <div class="fish-item left">
-                        <strong>📖 看书</strong><br>
-                        喜欢在文字里找安静
-                    </div>
-
-                    <div class="fish-item right">
-                        <strong>🎵 听音乐</strong><br>
-                        耳机一戴，世界与我无关
-                    </div>
-
-                    <div class="fish-item left">
-                        <strong>🎁 收集事物</strong><br>
-                        把喜欢的东西慢慢攒起来
-                    </div>
-
-                    <div class="fish-item right">
-                        <strong>✍️ 记录生活</strong><br>
-                        把细碎的温柔都写下来
-                    </div>
-
-                    <div class="fish-item left">
-                        <strong>☁️ 发呆放空</strong><br>
-                        什么都不想也没关系
-                    </div>
+                    <div class="fish-item left"><strong>📖 看书</strong><br>喜欢在文字里找安静</div>
+                    <div class="fish-item right"><strong>🎵 听音乐</strong><br>耳机一戴，世界与我无关</div>
+                    <div class="fish-item left"><strong>🎁 收集事物</strong><br>把喜欢的东西慢慢攒起来</div>
+                    <div class="fish-item right"><strong>✍️ 记录生活</strong><br>把细碎的温柔都写下来</div>
+                    <div class="fish-item left"><strong>☁️ 发呆放空</strong><br>什么都不想也没关系</div>
                 </div>
             </div>
 
-            <!-- 收藏鱼骨时间线 -->
             <h2 onclick="toggleBook(this)">📦 我的收藏</h2>
             <div class="book-content">
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
                     <div class="fish-tail"></div>
-
-                    <div class="fish-item left">
-                        <strong>📝 句子收藏</strong><br>
-                        看到就想抄下来的文字
-                    </div>
-
-                    <div class="fish-item right">
-                        <strong>🖼️ 画面收藏</strong><br>
-                        截图里藏着的温柔瞬间
-                    </div>
-
-                    <div class="fish-item left">
-                        <strong>📷 回忆收藏</strong><br>
-                        值得反复翻看的瞬间
-                    </div>
-
-                    <div class="fish-item right">
-                        <strong>🌿 治愈小物</strong><br>
-                        让我觉得温暖的一切
-                    </div>
+                    <div class="fish-item left"><strong>📝 句子收藏</strong><br>看到就想抄下来的文字</div>
+                    <div class="fish-item right"><strong>🖼️ 画面收藏</strong><br>截图里藏着的温柔瞬间</div>
+                    <div class="fish-item left"><strong>📷 回忆收藏</strong><br>值得反复翻看的瞬间</div>
+                    <div class="fish-item right"><strong>🌿 治愈小物</strong><br>让我觉得温暖的一切</div>
                 </div>
             </div>
 
@@ -349,13 +277,8 @@
     <script>
         function toggleBook(element) {
             var content = element.nextElementSibling;
-            if (content.style.display === "block") {
-                content.style.display = "none";
-            } else {
-                content.style.display = "block";
-            }
+            content.style.display = content.style.display === "block" ? "none" : "block";
         }
     </script>
-
 </body>
 </html>
