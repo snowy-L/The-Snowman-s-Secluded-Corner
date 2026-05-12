@@ -95,7 +95,7 @@
 
         .main h2 {
             font-size: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             border-left: 4px solid #aaa;
             padding-left: 10px;
             cursor: pointer;
@@ -111,8 +111,8 @@
 
         .book-content {
             display: none;
-            padding: 10px 0;
-            margin-bottom: 20px;
+            padding: 10px 0 50px;
+            margin-bottom: 30px;
             animation: openBook 0.4s ease;
         }
 
@@ -121,70 +121,74 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ✅ 关键：鱼骨时间线样式 */
+        /* ✅ 手绘感鱼骨时间线 */
         .fish-timeline {
             position: relative;
             width: 100%;
             max-width: 400px;
             margin: 0 auto;
-            padding: 20px 0;
+            padding: 30px 0;
         }
 
+        /* 手绘波浪鱼身 */
         .fish-body {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 10px;
-            height: 350px;
+            width: 12px;
+            height: 400px;
             background: repeating-linear-gradient(
-                to bottom,
-                #1a73b9,
-                #1a73b9 15px,
-                transparent 15px,
-                transparent 30px
+                180deg,
+                #1a73b9 0px,
+                #1a73b9 10px,
+                transparent 10px,
+                transparent 20px
             );
-            border-radius: 5px;
+            border-radius: 3px;
         }
 
+        /* 手绘鱼头 */
         .fish-head {
             position: absolute;
-            top: -20px;
+            top: -25px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 25px solid transparent;
-            border-right: 25px solid transparent;
-            border-bottom: 40px solid #1a73b9;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 50px solid #1a73b9;
         }
 
         .fish-head::after {
             content: "";
             position: absolute;
-            top: 15px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             background: white;
             border-radius: 50%;
         }
 
+        /* 手绘鱼尾 */
         .fish-tail {
             position: absolute;
-            bottom: -20px;
+            bottom: -25px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-top: 20px solid transparent;
-            border-bottom: 20px solid transparent;
-            border-left: 35px solid #1a73b9;
+            border-top: 25px solid transparent;
+            border-bottom: 25px solid transparent;
+            border-left: 45px solid #1a73b9;
         }
 
+        /* 时间线节点 */
         .fish-item {
             position: relative;
-            margin: 40px 0;
+            margin: 45px 0;
             width: 50%;
             font-size: 14px;
             line-height: 1.6;
@@ -192,13 +196,31 @@
 
         .fish-item.left {
             left: 0;
-            padding-right: 20px;
+            padding-right: 25px;
             text-align: right;
         }
 
         .fish-item.right {
             left: 50%;
-            padding-left: 20px;
+            padding-left: 25px;
+        }
+
+        /* 手绘箭头 */
+        .fish-item::after {
+            content: "→";
+            position: absolute;
+            top: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .fish-item.left::after {
+            right: 5px;
+            transform: scaleX(-1);
+        }
+
+        .fish-item.right::after {
+            left: 5px;
         }
 
         @media (max-width: 768px) {
@@ -206,6 +228,7 @@
             .left { width: 100%; }
             .fish-item { width: 100%; text-align: left; padding: 0 10px; }
             .fish-item.left, .fish-item.right { left: 0; padding: 0; text-align: left; }
+            .fish-item::after { display: none; }
         }
     </style>
 </head>
