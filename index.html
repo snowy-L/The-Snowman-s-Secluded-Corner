@@ -13,23 +13,25 @@
 
         body {
             font-family: "Microsoft YaHei", sans-serif;
-            background: #fdfdfd;
+            background: #fafbfc;
             color: #333;
             padding: 20px;
         }
 
         /* 顶部标题 */
         header {
-            border: 1px solid #555;
+            background: #ffffff;
             padding: 26px;
             text-align: center;
             margin-bottom: 24px;
-            background: #f7f9fc;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
         header h1 {
             font-size: 24px;
             color: #222;
+            font-weight: normal;
         }
 
         /* 布局：左 + 右 */
@@ -38,9 +40,10 @@
             gap: 20px;
             max-width: 1000px;
             margin: 0 auto;
+            flex-direction: row-reverse;
         }
 
-        /* 左侧 */
+        /* 左侧（原右侧） */
         .left {
             width: 240px;
             display: flex;
@@ -48,12 +51,13 @@
             gap: 20px;
         }
 
-        /* 左侧头像框 */
+        /* 头像框 */
         .avatar {
             height: 180px;
-            border: 1px solid #555;
-            background: #f7f9fc;
+            background: #fff;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
         .avatar img {
@@ -62,59 +66,59 @@
             object-fit: cover;
         }
 
-        /* 左侧下方长框 */
+        /* 关于我 */
         .side-box {
             flex: 1;
-            border: 1px solid #555;
+            background: #ffffff;
             padding: 20px;
-            background: #f7f9fc;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
         .side-box h3 {
             font-size: 16px;
             margin-bottom: 12px;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #eee;
             padding-bottom: 6px;
+            color: #444;
         }
 
         .side-box p {
             font-size: 14px;
             line-height: 1.7;
             margin-bottom: 8px;
+            color: #555;
         }
 
-        /* 右侧主内容 */
+        /* 右侧主内容（原左侧） */
         .main {
             flex: 1;
-            border: 1px solid #555;
-            padding: 30px;
             background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
         .main h2 {
             font-size: 18px;
-            margin-bottom: 16px;
-            border-left: 4px solid #777;
+            margin-bottom: 20px;
+            border-left: 4px solid #aaa;
             padding-left: 10px;
             cursor: pointer;
             transition: all 0.3s;
+            color: #333;
         }
 
         .main h2:hover {
-            color: #559;
+            border-left-color: #669;
+            color: #445;
             padding-left: 14px;
-        }
-
-        .main p {
-            line-height: 1.8;
-            margin-bottom: 14px;
-            font-size: 15px;
         }
 
         /* 翻书展开动画 */
         .book-content {
             display: none;
-            padding-left: 10px;
+            padding: 10px 0;
             margin-bottom: 20px;
             animation: openBook 0.4s ease;
         }
@@ -130,13 +134,109 @@
             }
         }
 
+        /* 鱼骨时间线样式 */
+        .fish-timeline {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* 鱼身 */
+        .fish-body {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 350px;
+            background: repeating-linear-gradient(
+                to bottom,
+                #1a73b9,
+                #1a73b9 15px,
+                transparent 15px,
+                transparent 30px
+            );
+            border-radius: 5px;
+        }
+
+        /* 鱼头 */
+        .fish-head {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-bottom: 40px solid #1a73b9;
+        }
+
+        .fish-head::after {
+            content: "";
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        /* 鱼尾 */
+        .fish-tail {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            border-left: 35px solid #1a73b9;
+        }
+
+        /* 时间线节点 */
+        .fish-item {
+            position: relative;
+            margin: 40px 0;
+            width: 50%;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 左边的内容 */
+        .fish-item.left {
+            left: 0;
+            padding-right: 20px;
+            text-align: right;
+        }
+
+        /* 右边的内容 */
+        .fish-item.right {
+            left: 50%;
+            padding-left: 20px;
+        }
+
         /* 手机适配 */
         @media (max-width: 768px) {
             .container {
-                flex-direction: column;
+                flex-direction: column-reverse;
             }
             .left {
                 width: 100%;
+            }
+            .fish-item {
+                width: 100%;
+                text-align: left;
+                padding: 0 10px;
+            }
+            .fish-item.left, .fish-item.right {
+                left: 0;
+                padding: 0;
+                text-align: left;
             }
         }
     </style>
@@ -150,12 +250,10 @@
 
     <div class="container">
         <div class="left">
-            <!-- 插入 Passport.jpg 头像 -->
             <div class="avatar">
                 <img src="Passport.jpg" alt="头像">
             </div>
 
-            <!-- 左侧长框：我的小标签 -->
             <div class="side-box">
                 <h3>关于我</h3>
                 <p>喜欢安静</p>
@@ -165,22 +263,70 @@
             </div>
         </div>
 
-        <!-- 右侧主内容 -->
         <div class="main">
-
+            <!-- 爱好鱼骨时间线 -->
             <h2 onclick="toggleBook(this)">✨ 我的爱好</h2>
             <div class="book-content">
-                <p>📖 看书</p>
-                <p>🎵 听音乐</p>
-                <p>🎁 收集喜欢的事物</p>
-                <p>✍️ 记录生活</p>
-                <p>☁️ 发呆、感受温柔的小事</p>
+                <div class="fish-timeline">
+                    <div class="fish-head"></div>
+                    <div class="fish-body"></div>
+                    <div class="fish-tail"></div>
+
+                    <div class="fish-item left">
+                        <strong>📖 看书</strong><br>
+                        喜欢在文字里找安静
+                    </div>
+
+                    <div class="fish-item right">
+                        <strong>🎵 听音乐</strong><br>
+                        耳机一戴，世界与我无关
+                    </div>
+
+                    <div class="fish-item left">
+                        <strong>🎁 收集事物</strong><br>
+                        把喜欢的东西慢慢攒起来
+                    </div>
+
+                    <div class="fish-item right">
+                        <strong>✍️ 记录生活</strong><br>
+                        把细碎的温柔都写下来
+                    </div>
+
+                    <div class="fish-item left">
+                        <strong>☁️ 发呆放空</strong><br>
+                        什么都不想也没关系
+                    </div>
+                </div>
             </div>
 
+            <!-- 收藏鱼骨时间线 -->
             <h2 onclick="toggleBook(this)">📦 我的收藏</h2>
             <div class="book-content">
-                <p>收藏句子、收藏画面、收藏回忆</p>
-                <p>收藏一切让我觉得温暖与治愈的东西</p>
+                <div class="fish-timeline">
+                    <div class="fish-head"></div>
+                    <div class="fish-body"></div>
+                    <div class="fish-tail"></div>
+
+                    <div class="fish-item left">
+                        <strong>📝 句子收藏</strong><br>
+                        看到就想抄下来的文字
+                    </div>
+
+                    <div class="fish-item right">
+                        <strong>🖼️ 画面收藏</strong><br>
+                        截图里藏着的温柔瞬间
+                    </div>
+
+                    <div class="fish-item left">
+                        <strong>📷 回忆收藏</strong><br>
+                        值得反复翻看的瞬间
+                    </div>
+
+                    <div class="fish-item right">
+                        <strong>🌿 治愈小物</strong><br>
+                        让我觉得温暖的一切
+                    </div>
+                </div>
             </div>
 
             <h2 onclick="toggleBook(this)">📝 值得记录的小事</h2>
@@ -197,12 +343,10 @@
                 <p>认真生活，忠于自己。</p>
                 <p>在自己的小世界里，安静而闪亮。</p>
             </div>
-
         </div>
     </div>
 
     <script>
-        // 翻书展开/收起效果
         function toggleBook(element) {
             var content = element.nextElementSibling;
             if (content.style.display === "block") {
