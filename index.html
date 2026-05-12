@@ -48,16 +48,18 @@
             gap: 20px;
         }
 
-        /* 左侧上方小框 */
+        /* 左侧头像框 */
         .avatar {
             height: 180px;
             border: 1px solid #555;
             background: #f7f9fc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            color: #666;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* 左侧下方长框 */
@@ -94,12 +96,38 @@
             margin-bottom: 16px;
             border-left: 4px solid #777;
             padding-left: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .main h2:hover {
+            color: #559;
+            padding-left: 14px;
         }
 
         .main p {
             line-height: 1.8;
             margin-bottom: 14px;
             font-size: 15px;
+        }
+
+        /* 翻书展开动画 */
+        .book-content {
+            display: none;
+            padding-left: 10px;
+            margin-bottom: 20px;
+            animation: openBook 0.4s ease;
+        }
+
+        @keyframes openBook {
+            from {
+                opacity: 0;
+                transform: translateY(-5px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* 手机适配 */
@@ -121,10 +149,10 @@
     </header>
 
     <div class="container">
-        <div class="left" src="Passport.jpg">
-            <!-- 左侧小框：头像/照片 -->
+        <div class="left">
+            <!-- 插入 Passport.jpg 头像 -->
             <div class="avatar">
-                我的照片 / 头像
+                <img src="Passport.jpg" alt="头像">
             </div>
 
             <!-- 左侧长框：我的小标签 -->
@@ -139,24 +167,51 @@
 
         <!-- 右侧主内容 -->
         <div class="main">
-            <h2>✨ 我的爱好</h2>
-            <p>看书、听音乐、收集喜欢的事物、记录生活、发呆、感受温柔的小事。</p>
 
-            <h2>📦 我的收藏</h2>
-            <p>收藏句子、收藏画面、收藏回忆、收藏一切让我觉得温暖与治愈的东西。</p>
+            <h2 onclick="toggleBook(this)">✨ 我的爱好</h2>
+            <div class="book-content">
+                <p>📖 看书</p>
+                <p>🎵 听音乐</p>
+                <p>🎁 收集喜欢的事物</p>
+                <p>✍️ 记录生活</p>
+                <p>☁️ 发呆、感受温柔的小事</p>
+            </div>
 
-            <h2>📝 值得记录的小事</h2>
-            <p>风很舒服的傍晚。</p>
-            <p>听到一首很喜欢的歌。</p>
-            <p>看到一段触动内心的文字。</p>
-            <p>安静地、认真地、为自己活一小会儿。</p>
+            <h2 onclick="toggleBook(this)">📦 我的收藏</h2>
+            <div class="book-content">
+                <p>收藏句子、收藏画面、收藏回忆</p>
+                <p>收藏一切让我觉得温暖与治愈的东西</p>
+            </div>
 
-            <h2>🌙 我的小心情</h2>
-            <p>慢慢走，不必急。</p>
-            <p>认真生活，忠于自己。</p>
-            <p>在自己的小世界里，安静而闪亮。</p>
+            <h2 onclick="toggleBook(this)">📝 值得记录的小事</h2>
+            <div class="book-content">
+                <p>风很舒服的傍晚。</p>
+                <p>听到一首很喜欢的歌。</p>
+                <p>看到一段触动内心的文字。</p>
+                <p>安静地、认真地、为自己活一小会儿。</p>
+            </div>
+
+            <h2 onclick="toggleBook(this)">🌙 我的小心情</h2>
+            <div class="book-content">
+                <p>慢慢走，不必急。</p>
+                <p>认真生活，忠于自己。</p>
+                <p>在自己的小世界里，安静而闪亮。</p>
+            </div>
+
         </div>
     </div>
+
+    <script>
+        // 翻书展开/收起效果
+        function toggleBook(element) {
+            var content = element.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+    </script>
 
 </body>
 </html>
