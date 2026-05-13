@@ -12,50 +12,67 @@
         }
 
         body {
-            font-family: "Microsoft YaHei", sans-serif;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
             background: url("bg.png") no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
             color: #333;
             padding: 20px;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: -1;
         }
 
         header {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.9);
             padding: 26px;
             text-align: center;
             margin-bottom: 24px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         header h1 {
-            font-size: 24px;
+            font-size: 28px;
             color: #222;
-            font-weight: normal;
+            font-weight: 600;
         }
 
         .container {
             display: flex;
-            gap: 20px;
+            gap: 24px;
             max-width: 1000px;
             margin: 0 auto;
             flex-direction: row-reverse;
         }
 
         .left {
-            width: 240px;
+            width: 260px;
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
 
         .avatar {
-            height: 180px;
-            background: #fff;
-            border-radius: 12px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
         }
 
         .avatar img {
@@ -66,68 +83,71 @@
 
         .side-box {
             flex: 1;
-            background: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
         }
 
         .side-box h3 {
-            font-size: 16px;
-            margin-bottom: 12px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 6px;
+            font-size: 18px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
             color: #444;
+            font-weight: 600;
         }
 
         .side-box p {
-            font-size: 14px;
-            line-height: 1.7;
-            margin-bottom: 8px;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 10px;
             color: #555;
         }
 
         .main {
             flex: 1;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 36px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
         }
 
         .main h2 {
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 30px;
-            border-left: 4px solid #aaa;
-            padding-left: 10px;
+            border-left: 4px solid #667eea;
+            padding-left: 14px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             color: #333;
+            font-weight: 600;
         }
 
         .main h2:hover {
-            border-left-color: #669;
-            color: #445;
-            padding-left: 14px;
+            border-left-color: #764ba2;
+            color: #667eea;
+            padding-left: 18px;
         }
 
         .book-content {
             display: none;
-            padding: 10px 0 60px;
+            padding: 10px 0 40px;
             margin-bottom: 30px;
             animation: openBook 0.4s ease;
         }
 
         @keyframes openBook {
-            from { opacity: 0; transform: translateY(-5px); }
+            from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 手绘感鱼骨时间线 通用 */
         .fish-timeline {
             position: relative;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             margin: 0 auto;
             padding: 30px 0 50px;
         }
@@ -137,7 +157,7 @@
             left: 50%;
             transform: translateX(-50%);
             width: 12px;
-            height: 420px;
+            height: 440px;
             background: repeating-linear-gradient(
                 180deg,
                 #1a73b9 0px,
@@ -172,7 +192,6 @@
             border-radius: 50%;
         }
 
-        /* 镂空格栅/扫把三角 鱼尾 */
         .fish-tail {
             position: absolute;
             bottom: -35px;
@@ -198,7 +217,6 @@
         .fish-tail span:nth-child(4) { transform: translateX(-50%) rotate(15deg); }
         .fish-tail span:nth-child(5) { transform: translateX(-50%) rotate(30deg); }
 
-        /* 紧凑上下间距 */
         .fish-item {
             position: relative;
             margin: 28px 0;
@@ -247,7 +265,7 @@
 
 <body>
     <header>
-        <h1>雪人的世界</h1>
+        <h1>❄️ 雪人的世界 ❄️</h1>
     </header>
 
     <div class="container">
@@ -256,7 +274,7 @@
                 <img src="Passport.jpg" alt="头像">
             </div>
             <div class="side-box">
-                <h3>我?</h3>
+                <h3>🌟 关于我</h3>
                 <p>喜欢安静也喜欢热闹</p>
                 <p>不显眼的二刺猿</p>
                 <p>加载中...</p>
@@ -270,13 +288,7 @@
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
-                    <div class="fish-tail">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+                    <div class="fish-tail"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="fish-item left"><strong>📖</strong><br>喜欢在xhs里找安静</div>
                     <div class="fish-item right"><strong>🎵</strong><br>爱上演唱会的氛围</div>
                     <div class="fish-item left"><strong>🌙</strong><br>喜欢就要得到</div>
@@ -290,13 +302,7 @@
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
-                    <div class="fish-tail">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+                    <div class="fish-tail"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="fish-item left"><strong>🐱</strong><br>云养喵喵和汪总</div>
                     <div class="fish-item right"><strong>🖼️</strong><br>截图里藏着的温柔瞬间</div>
                     <div class="fish-item left"><strong>📷</strong><br>拍拍拍记录每一瞬间</div>
@@ -309,13 +315,7 @@
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
-                    <div class="fish-tail">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+                    <div class="fish-tail"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="fish-item left"><strong>🌤️</strong><br>每日一拍</div>
                     <div class="fish-item right"><strong>🎶</strong><br>今日推荐歌曲</div>
                     <div class="fish-item left"><strong>📜</strong><br>感触的文字</div>
@@ -328,13 +328,7 @@
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
-                    <div class="fish-tail">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
+                    <div class="fish-tail"><span></span><span></span><span></span><span></span><span></span></div>
                     <div class="fish-item left"><strong>早上</strong><br>一上班就两眼空空</div>
                     <div class="fish-item right"><strong>中午</strong><br>饿到晕厥</div>
                     <div class="fish-item left"><strong>晚上</strong><br>不可多得的休闲时光</div>
