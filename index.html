@@ -121,7 +121,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 手绘感鱼骨时间线 通用 */
+        /* ✅ 方块节点鱼骨时间线（参考你给的截图样式） */
         .fish-timeline {
             position: relative;
             width: 100%;
@@ -130,22 +130,25 @@
             padding: 30px 0 50px;
         }
 
+        /* 鱼身：方块节点 */
         .fish-body {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
             width: 12px;
             height: 420px;
-            background: repeating-linear-gradient(
-                180deg,
-                #1a73b9 0px,
-                #1a73b9 10px,
-                transparent 10px,
-                transparent 20px
-            );
-            border-radius: 3px;
         }
 
+        .fish-body .block {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: #1a73b9;
+        }
+
+        /* 鱼头 */
         .fish-head {
             position: absolute;
             top: -25px;
@@ -170,7 +173,7 @@
             border-radius: 50%;
         }
 
-        /* 镂空格栅/扫把三角 鱼尾 重点修改 */
+        /* 镂空扫把鱼尾 */
         .fish-tail {
             position: absolute;
             bottom: -35px;
@@ -199,7 +202,7 @@
         /* 时间线节点 */
         .fish-item {
             position: relative;
-            margin: 45px 0;
+            margin: 55px 0;
             width: 50%;
             font-size: 14px;
             line-height: 1.6;
@@ -207,21 +210,23 @@
 
         .fish-item.left {
             left: 0;
-            padding-right: 25px;
+            padding-right: 30px;
             text-align: right;
         }
 
         .fish-item.right {
             left: 50%;
-            padding-left: 25px;
+            padding-left: 30px;
         }
 
+        /* 箭头 */
         .fish-item::after {
             content: "→";
             position: absolute;
             top: 5px;
             color: #333;
             font-weight: bold;
+            font-size: 16px;
         }
 
         .fish-item.left::after {
@@ -267,8 +272,13 @@
             <div class="book-content">
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
-                    <div class="fish-body"></div>
-                    <!-- 镂空扫把鱼尾 -->
+                    <div class="fish-body">
+                        <div class="block" style="top: 20px;"></div>
+                        <div class="block" style="top: 90px;"></div>
+                        <div class="block" style="top: 160px;"></div>
+                        <div class="block" style="top: 230px;"></div>
+                        <div class="block" style="top: 300px;"></div>
+                    </div>
                     <div class="fish-tail">
                         <span></span>
                         <span></span>
@@ -288,7 +298,12 @@
             <div class="book-content">
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
-                    <div class="fish-body"></div>
+                    <div class="fish-body">
+                        <div class="block" style="top: 20px;"></div>
+                        <div class="block" style="top: 90px;"></div>
+                        <div class="block" style="top: 160px;"></div>
+                        <div class="block" style="top: 230px;"></div>
+                    </div>
                     <div class="fish-tail">
                         <span></span>
                         <span></span>
@@ -307,7 +322,12 @@
             <div class="book-content">
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
-                    <div class="fish-body"></div>
+                    <div class="fish-body">
+                        <div class="block" style="top: 20px;"></div>
+                        <div class="block" style="top: 90px;"></div>
+                        <div class="block" style="top: 160px;"></div>
+                        <div class="block" style="top: 230px;"></div>
+                    </div>
                     <div class="fish-tail">
                         <span></span>
                         <span></span>
@@ -326,7 +346,11 @@
             <div class="book-content">
                 <div class="fish-timeline">
                     <div class="fish-head"></div>
-                    <div class="fish-body"></div>
+                    <div class="fish-body">
+                        <div class="block" style="top: 20px;"></div>
+                        <div class="block" style="top: 90px;"></div>
+                        <div class="block" style="top: 160px;"></div>
+                    </div>
                     <div class="fish-tail">
                         <span></span>
                         <span></span>
