@@ -13,10 +13,10 @@
 
         body {
             font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-            background: url("bg.png") no-repeat center center;
+            /* 增加渐变兜底，背景图加载失败也好看 */
+            background: linear-gradient(180deg, #f0f7ff, #e6f2ff) url("bg.png") no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
-            /* 提升背景清晰度：降低遮罩透明度 */
             background-color: #f0f7ff;
             color: #333;
             padding: 20px;
@@ -61,7 +61,7 @@
             z-index: 2;
         }
 
-        /* 标题框内部雪花动画 */
+        /* 标题框内部雪花动画 - 增加z-index确保可见 */
         header .snow-inner {
             position: absolute;
             top: 0;
@@ -69,6 +69,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            z-index: 2;
         }
 
         header h1 {
@@ -85,6 +86,9 @@
             max-width: 1000px;
             margin: 0 auto;
             flex-direction: row-reverse;
+            /* 内容层级高于雪花，避免被遮挡 */
+            position: relative;
+            z-index: 2;
         }
 
         .left {
@@ -253,13 +257,14 @@
             line-height: 1.5;
         }
 
-        .fish-item.left {
+        /* 修复类名冲突，改为timeline-left */
+        .fish-item.timeline-left {
             left: 0;
             padding-right: 25px;
             text-align: right;
         }
 
-        .fish-item.right {
+        .fish-item.timeline-right {
             left: 50%;
             padding-left: 25px;
         }
@@ -272,21 +277,21 @@
             font-weight: bold;
         }
 
-        .fish-item.left::after {
+        .fish-item.timeline-left::after {
             right: 5px;
             transform: scaleX(-1);
         }
 
-        .fish-item.right::after {
+        .fish-item.timeline-right::after {
             left: 5px;
         }
 
-        /* 雪花动画样式 */
+        /* 雪花动画样式 - 改为蓝白色 */
         .snowflake {
             position: absolute;
-            background: white;
+            background: linear-gradient(135deg, #ffffff, #b3d9ff, #99ccff);
             border-radius: 50%;
-            opacity: 0.8;
+            box-shadow: 0 0 3px rgba(102, 170, 255, 0.7);
             animation: fall linear infinite;
         }
 
@@ -298,8 +303,7 @@
         @media (max-width: 768px) {
             .container { flex-direction: column-reverse; }
             .left { width: 100%; }
-            .fish-item { width: 100%; text-align: left; padding: 0 10px; }
-            .fish-item.left, .fish-item.right { left: 0; padding: 0; text-align: left; }
+            .fish-item { width: 100% !important; text-align: left !important; padding: 0 10px 0 30px !important; left: 0 !important; }
             .fish-item::after { display: none; }
         }
     </style>
@@ -318,7 +322,8 @@
     <div class="container">
         <div class="left">
             <div class="avatar">
-                <img src="Passport.jpg" alt="头像">
+                <!-- 增加加载失败兜底图 -->
+                <img src="Passport.jpg" alt="头像" onerror="this.src='https://picsum.photos/200/200?random=1'">
             </div>
             <div class="side-box">
                 <h3>🌟 关于我</h3>
@@ -336,11 +341,11 @@
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
                     <div class="fish-tail"><span></span><span></span><span></span><span></span><span></span></div>
-                    <div class="fish-item left"><strong>📖</strong><br>喜欢在xhs里找安静</div>
-                    <div class="fish-item right"><strong>🎵</strong><br>爱上演唱会的氛围</div>
-                    <div class="fish-item left"><strong>🌙</strong><br>喜欢就要得到</div>
-                    <div class="fish-item right"><strong>✍️</strong><br>几乎每天都发发微博</div>
-                    <div class="fish-item left"><strong>☁️</strong><br>对特定的事物毫无关心</div>
+                    <div class="fish-item timeline-left"><strong>📖</strong><br>喜欢在xhs里找安静</div>
+                    <div class="fish-item timeline-right"><strong>🎵</strong><br>爱上演唱会的氛围</div>
+                    <div class="fish-item timeline-left"><strong>🌙</strong><br>喜欢就要得到</div>
+                    <div class="fish-item timeline-right"><strong>✍️</strong><br>几乎每天都发发微博</div>
+                    <div class="fish-item timeline-left"><strong>☁️</strong><br>对特定的事物毫无关心</div>
                 </div>
             </div>
 
@@ -350,10 +355,10 @@
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
                     <div class="fish-tail"><span></span><span></span><span></span><span></span><span></span></div>
-                    <div class="fish-item left"><strong>🐱</strong><br>云养喵喵和汪总</div>
-                    <div class="fish-item right"><strong>🖼️</strong><br>截图里藏着的温柔瞬间</div>
-                    <div class="fish-item left"><strong>📷</strong><br>拍拍拍记录每一瞬间</div>
-                    <div class="fish-item right"><strong>🎁</strong><br>这是我的大小物分享</div>
+                    <div class="fish-item timeline-left"><strong>🐱</strong><br>云养喵喵和汪总</div>
+                    <div class="fish-item timeline-right"><strong>🖼️</strong><br>截图里藏着的温柔瞬间</div>
+                    <div class="fish-item timeline-left"><strong>📷</strong><br>拍拍拍记录每一瞬间</div>
+                    <div class="fish-item timeline-right"><strong>🎁</strong><br>这是我的大小物分享</div>
                 </div>
             </div>
 
@@ -363,10 +368,10 @@
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
                     <div class="fish-tail"><span></span><span></span><span></span><span></span><span></span></div>
-                    <div class="fish-item left"><strong>🌤️</strong><br>每日一拍</div>
-                    <div class="fish-item right"><strong>🎶</strong><br>今日推荐歌曲</div>
-                    <div class="fish-item left"><strong>📜</strong><br>感触的文字</div>
-                    <div class="fish-item right"><strong>🧘</strong><br>今日热词</div>
+                    <div class="fish-item timeline-left"><strong>🌤️</strong><br>每日一拍</div>
+                    <div class="fish-item timeline-right"><strong>🎶</strong><br>今日推荐歌曲</div>
+                    <div class="fish-item timeline-left"><strong>📜</strong><br>感触的文字</div>
+                    <div class="fish-item timeline-right"><strong>🧘</strong><br>今日热词</div>
                 </div>
             </div>
 
@@ -376,52 +381,67 @@
                     <div class="fish-head"></div>
                     <div class="fish-body"></div>
                     <div class="fish-tail"><span></span><span></span><span></span><span></span><span></span></div>
-                    <div class="fish-item left"><strong>早上</strong><br>一上班就两眼空空</div>
-                    <div class="fish-item right"><strong>中午</strong><br>饿到晕厥</div>
-                    <div class="fish-item left"><strong>晚上</strong><br>不可多得的休闲时光</div>
+                    <div class="fish-item timeline-left"><strong>早上</strong><br>一上班就两眼空空</div>
+                    <div class="fish-item timeline-right"><strong>中午</strong><br>饿到晕厥</div>
+                    <div class="fish-item timeline-left"><strong>晚上</strong><br>不可多得的休闲时光</div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // 雪花生成函数
-        function createSnow(containerId, count, isHeader = false) {
-            const container = document.getElementById(containerId);
-            for (let i = 0; i < count; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.classList.add('snowflake');
-                
-                // 随机大小
-                const size = isHeader ? Math.random() * 4 + 1 : Math.random() * 6 + 2;
-                snowflake.style.width = `${size}px`;
-                snowflake.style.height = `${size}px`;
-                
-                // 随机位置
-                snowflake.style.left = `${Math.random() * 100}%`;
-                
-                // 随机下落速度
-                const duration = isHeader ? Math.random() * 8 + 5 : Math.random() * 10 + 8;
-                snowflake.style.animationDuration = `${duration}s`;
-                
-                // 随机延迟
-                snowflake.style.animationDelay = `${Math.random() * 10}s`;
-                
-                container.appendChild(snowflake);
-            }
-        }
+       // 雪花生成函数
+function createSnow(containerId, count, isHeader = false) {
+    const container = document.getElementById(containerId);
+    for (let i = 0; i < count; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        
+        // 随机大小
+        const size = isHeader ? Math.random() * 4 + 1 : Math.random() * 6 + 2;
+        snowflake.style.width = `${size}px`;
+        snowflake.style.height = `${size}px`;
+        
+        // 随机位置
+        snowflake.style.left = `${Math.random() * 100}%`;
+        
+        // 随机透明度 0.6-0.9 增强层次感
+        snowflake.style.opacity = Math.random() * 0.3 + 0.6;
 
-        // 生成雪花：页面全局50片，标题框20片
-        window.onload = function() {
-            createSnow('snow', 50);
-            createSnow('headerSnow', 20, true);
-        };
+        // 新增：随机水平偏移，模拟雪花左右飘动效果，标题栏内偏移更小更自然
+        const xOffset = (Math.random() - 0.5) * (isHeader ? 50 : 120);
+        snowflake.style.setProperty('--x-offset', `${xOffset}px`);
+        
+        // 随机下落速度
+        const duration = isHeader ? Math.random() * 8 + 5 : Math.random() * 10 + 8;
+        snowflake.style.animationDuration = `${duration}s`;
+        
+        // 随机延迟
+        snowflake.style.animationDelay = `${Math.random() * 10}s`;
+        
+        container.appendChild(snowflake);
+    }
+}
 
-        // 原有折叠功能
-        function toggleBook(element) {
-            var content = element.nextElementSibling;
-            content.style.display = content.style.display === "block" ? "none" : "block";
-        }
-    </script>
-</body>
-</html>
+// 页面加载完成后执行
+window.onload = function() {
+    createSnow('snow', 50); // 全局雪花50片
+    createSnow('headerSnow', 20, true); // 标题栏雪花20片
+    // 新增：默认展开第一个内容板块，避免打开页面全是空白
+    document.querySelector('.book-content').style.display = 'block';
+};
+
+// 折叠功能优化
+function toggleBook(element) {
+    const content = element.nextElementSibling;
+    const isOpen = content.style.display === "block";
+    content.style.display = isOpen ? "none" : "block";
+
+    // 【可选功能】需要手风琴模式（展开当前自动收起其他）就把下面注释打开
+    // if (!isOpen) {
+    //     document.querySelectorAll('.book-content').forEach(item => {
+    //         if (item !== content) item.style.display = 'none';
+    //     });
+    // }
+}
+                
