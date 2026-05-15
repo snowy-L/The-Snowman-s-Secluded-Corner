@@ -437,11 +437,12 @@ function toggleBook(element) {
     const isOpen = content.style.display === "block";
     content.style.display = isOpen ? "none" : "block";
 
-    // 【可选功能】需要手风琴模式（展开当前自动收起其他）就把下面注释打开
-    // if (!isOpen) {
-    //     document.querySelectorAll('.book-content').forEach(item => {
-    //         if (item !== content) item.style.display = 'none';
-    //     });
-    // }
-}
-                
+// 可选：手风琴模式（展开当前时自动关闭其他面板），需要的话取消注释即可
+  if (!isShow) {
+                 document.querySelectorAll('.book-content').forEach(item => {
+                     if (item !== content) item.style.display = 'none';
+                 });
+             }
+    </script>
+</body>
+</html>              
