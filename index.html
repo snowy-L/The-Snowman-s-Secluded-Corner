@@ -179,119 +179,97 @@ body {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .fish-timeline {
-            position: relative;
-            width: 100%;
-            max-width: 420px;
-            margin: 0 auto;
-            padding: 30px 0 50px;
-            z-index: 10; /* 确保鱼骨在最上层 */
-        }
+       /* 替换原来的.fish-timeline及以下所有鱼骨相关样式 */
+.fish-timeline {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 30px 0 60px;
+    z-index: 10;
+}
+/* 手绘鱼骨身：锯齿形+不规则抖动 */
+.fish-body {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) rotate(0.5deg); /* 微微倾斜模拟手绘歪歪的感觉 */
+    width: 16px;
+    height: 100%;
+    background: repeating-linear-gradient(
+        180deg,
+        #165DFF 0px,
+        #165DFF 18px,
+        transparent 18px,
+        transparent 28px
+    );
+    filter: url(#rough-edge); /* 加毛边效果，下面会加svg滤镜 */
+    z-index: 11;
+}
+/* 手绘鱼头：带表情+圆角 */
+.fish-head {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-1deg);
+    width: 60px;
+    height: 70px;
+    background: #165DFF;
+    border-radius: 50% 50% 40% 40%;
+    z-index: 11;
+    filter: url(#rough-edge);
+}
+/* 鱼头眼睛 */
+.fish-head::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+}
+/* 鱼头微笑 */
+.fish-head::after {
+    content: "";
+    position: absolute;
+    top: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 8px;
+    border-bottom: 2px solid white;
+    border-radius: 0 0 10px 10px;
+}
+/* 手绘鱼尾 */
+.fish-tail {
+    position: absolute;
+    bottom: -45px;
+    left: 50%;
+    transform: translateX(-50%) rotate(1deg);
+    width: 0;
+    height: 0;
+    border-left: 22px solid transparent;
+    border-right: 22px solid transparent;
+    border-top: 45px solid #165DFF;
+    z-index: 11;
+    filter: url(#rough-edge);
+}
+/* 删掉原来的.fish-tail span相关样式，不需要了 */
+.fish-tail span {
+    display: none;
+}
 
-        .fish-body {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 12px;
-            height: 100%;
-            background: repeating-linear-gradient(
-                180deg,
-                #1a73b9 0px,
-                #1a73b9 10px,
-                transparent 10px,
-                transparent 20px
-            );
-            border-radius: 3px;
-            z-index: 11;
-        }
-
-        .fish-head {
-            position: absolute;
-            top: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 30px solid transparent;
-            border-right: 30px solid transparent;
-            border-bottom: 50px solid #1a73b9;
-            z-index: 11;
-        }
-
-        .fish-head::after {
-            content: "";
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
-        }
-
-        .fish-tail {
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 60px;
-            background: transparent;
-            z-index: 11;
-        }
-
-        .fish-tail span {
-            position: absolute;
-            left: 50%;
-            width: 2px;
-            height: 30px;
-            background: #1a73b9;
-            transform-origin: top center;
-        }
-
-        .fish-tail span:nth-child(1) { transform: translateX(-50%) rotate(-30deg); }
-        .fish-tail span:nth-child(2) { transform: translateX(-50%) rotate(-15deg); }
-        .fish-tail span:nth-child(3) { transform: translateX(-50%) rotate(0deg); }
-        .fish-tail span:nth-child(4) { transform: translateX(-50%) rotate(15deg); }
-        .fish-tail span:nth-child(5) { transform: translateX(-50%) rotate(30deg); }
-
-        .fish-item {
-            position: relative;
-            margin: 28px 0;
-            width: 50%;
-            font-size: 14px;
-            line-height: 1.5;
-            z-index: 12; /* 文字在鱼骨上层 */
-        }
-
-        .fish-item.timeline-left {
-            left: 0;
-            padding-right: 25px;
-            text-align: right;
-        }
-
-        .fish-item.timeline-right {
-            left: 50%;
-            padding-left: 25px;
-        }
-
-        .fish-item::after {
-            content: "→";
-            position: absolute;
-            top: 5px;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .fish-item.timeline-left::after {
-            right: 5px;
-            transform: scaleX(-1);
-        }
-
-        .fish-item.timeline-right::after {
-            left: 5px;
-        }
+.fish-item {
+    position: relative;
+    margin: 32px 0;
+    width: 50%;
+    font-size: 15px;
+    line-height: 1.6;
+    z-index: 12;
+    font-family: "Marker Felt", "手写体", "Microsoft YaHei", sans-serif; /* 换成手写字体更像 */
+}
 
         /* 蓝白色雪花样式 */
         .snowflake {
@@ -318,6 +296,13 @@ body {
     </style>
 </head>
 <body>
+    <svg width="0" height="0" style="position:absolute;">
+        <filter id="rough-edge">
+            <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="2" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="2"/>
+        </filter>
+    </svg>
+    
     <!-- 全局雪花容器 -->
     <div class="snow" id="snow"></div>
     
