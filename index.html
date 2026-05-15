@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>雪人的世界</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Ma+Shan+Zheng&display=swap">
     <style>
         * {
             margin: 0;
@@ -179,96 +180,84 @@ body {
             to { opacity: 1; transform: translateY(0); }
         }
 
-       /* 替换原来的.fish-timeline及以下所有鱼骨相关样式 */
+     /* 替换所有鱼骨相关CSS ↓ */
 .fish-timeline {
     position: relative;
     width: 100%;
-    max-width: 420px;
+    max-width: 480px;
     margin: 0 auto;
-    padding: 30px 0 60px;
+    padding: 40px 10px 80px;
     z-index: 10;
+    min-height: 580px; /* 保证鱼骨完整显示，内容多可以自己调大 */
+    /* 核心：手绘鱼骨作为背景 */
+    background: url("./hand-fish.png") no-repeat center top;
+    background-size: auto 100%; /* 高度自适应，不拉伸变形 */
 }
-/* 手绘鱼骨身：锯齿形+不规则抖动 */
-.fish-body {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%) rotate(0.5deg); /* 微微倾斜模拟手绘歪歪的感觉 */
-    width: 16px;
-    height: 100%;
-    background: repeating-linear-gradient(
-        180deg,
-        #165DFF 0px,
-        #165DFF 18px,
-        transparent 18px,
-        transparent 28px
-    );
-    filter: url(#rough-edge); /* 加毛边效果，下面会加svg滤镜 */
-    z-index: 11;
-}
-/* 手绘鱼头：带表情+圆角 */
-.fish-head {
-    position: absolute;
-    top: -28px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-1deg);
-    width: 60px;
-    height: 70px;
-    background: #165DFF;
-    border-radius: 50% 50% 40% 40%;
-    z-index: 11;
-    filter: url(#rough-edge);
-}
-/* 鱼头眼睛 */
-.fish-head::before {
-    content: "";
-    position: absolute;
-    top: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 14px;
-    height: 14px;
-    background: white;
-    border-radius: 50%;
-}
-/* 鱼头微笑 */
-.fish-head::after {
-    content: "";
-    position: absolute;
-    top: 38px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 22px;
-    height: 8px;
-    border-bottom: 2px solid white;
-    border-radius: 0 0 10px 10px;
-}
-/* 手绘鱼尾 */
-.fish-tail {
-    position: absolute;
-    bottom: -45px;
-    left: 50%;
-    transform: translateX(-50%) rotate(1deg);
-    width: 0;
-    height: 0;
-    border-left: 22px solid transparent;
-    border-right: 22px solid transparent;
-    border-top: 45px solid #165DFF;
-    z-index: 11;
-    filter: url(#rough-edge);
-}
-/* 删掉原来的.fish-tail span相关样式，不需要了 */
-.fish-tail span {
-    display: none;
+
+/* 原来的CSS生成的鱼骨全部隐藏，不用改HTML */
+.fish-head, .fish-body, .fish-tail {
+    display: none !important;
 }
 
 .fish-item {
     position: relative;
-    margin: 32px 0;
-    width: 50%;
+    margin: 36px 0; /* 上下间距，和鱼骨齿对齐，不合适可以自己微调数值 */
+    width: 45%;
     font-size: 15px;
     line-height: 1.6;
     z-index: 12;
-    font-family: "Marker Felt", "手写体", "Microsoft YaHei", sans-serif; /* 换成手写字体更像 */
+    /* 选加：换成手写字体更搭，不需要就删掉这行 */
+    font-family: "ZCOOL KuaiLe", "Ma Shan Zheng", "Marker Felt", sans-serif;
+}
+
+.fish-item.timeline-left {
+    left: 0;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.fish-item.timeline-right {
+    left: 55%; /* 右边文字向右挪一点，和鱼骨齿对齐 */
+    padding-left: 10px;
+}
+
+/* 手绘箭头，和你手账里的样式一致 */
+.fish-item::after {
+    content: "➤";
+    position: absolute;
+    top: 6px;
+    color: #165DFF;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.fish-item.timeline-left::after {
+    right: -16px;
+    transform: scaleX(-1); /* 左边箭头朝右 */
+}
+
+.fish-item.timeline-right::after {
+    left: -16px;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .fish-timeline {
+        background-size: 60% auto;
+        background-position: 80% top;
+        min-height: auto;
+    }
+    .fish-item {
+        width: 100% !important;
+        left: 0 !important;
+        text-align: left !important;
+        padding: 0 0 0 40px !important;
+        margin: 28px 0 !important;
+    }
+    .fish-item::after {
+        left: 10px !important;
+        transform: none !important;
+    }
 }
 
         /* 蓝白色雪花样式 */
