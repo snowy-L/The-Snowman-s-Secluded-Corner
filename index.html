@@ -13,7 +13,6 @@
 
         body {
             font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-            /* 增加渐变兜底，背景图加载失败也好看 */
             background: linear-gradient(180deg, #f0f7ff, #e6f2ff) url("bg.png") no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
@@ -44,7 +43,7 @@
             z-index: -1;
         }
 
-        /* 标题框雪花背景 + 样式优化 */
+        /* 标题框样式 */
         header {
             background: rgba(255, 255, 255, 0.85);
             padding: 26px;
@@ -61,7 +60,7 @@
             z-index: 2;
         }
 
-        /* 标题框内部雪花动画 - 增加z-index确保可见 */
+        /* 标题框内部雪花 */
         header .snow-inner {
             position: absolute;
             top: 0;
@@ -86,7 +85,6 @@
             max-width: 1000px;
             margin: 0 auto;
             flex-direction: row-reverse;
-            /* 内容层级高于雪花，避免被遮挡 */
             position: relative;
             z-index: 2;
         }
@@ -156,9 +154,10 @@
             transition: all 0.3s ease;
             color: #333;
             font-weight: 600;
+            user-select: none;
         }
 
-        .main h2:hover {
+        .main h2:hover, .main h2.active {
             border-left-color: #764ba2;
             color: #667eea;
             padding-left: 18px;
@@ -169,6 +168,9 @@
             padding: 10px 0 40px;
             margin-bottom: 30px;
             animation: openBook 0.4s ease;
+            min-height: 400px; /* 固定最小高度，避免内容看不见 */
+            background: rgba(255,255,255,0.4);
+            border-radius: 8px;
         }
 
         @keyframes openBook {
@@ -182,6 +184,7 @@
             max-width: 420px;
             margin: 0 auto;
             padding: 30px 0 50px;
+            z-index: 10; /* 确保鱼骨在最上层 */
         }
 
         .fish-body {
@@ -198,6 +201,7 @@
                 transparent 20px
             );
             border-radius: 3px;
+            z-index: 11;
         }
 
         .fish-head {
@@ -210,6 +214,7 @@
             border-left: 30px solid transparent;
             border-right: 30px solid transparent;
             border-bottom: 50px solid #1a73b9;
+            z-index: 11;
         }
 
         .fish-head::after {
@@ -232,6 +237,7 @@
             width: 50px;
             height: 60px;
             background: transparent;
+            z-index: 11;
         }
 
         .fish-tail span {
@@ -255,9 +261,9 @@
             width: 50%;
             font-size: 14px;
             line-height: 1.5;
+            z-index: 12; /* 文字在鱼骨上层 */
         }
 
-        /* 修复类名冲突，改为timeline-left */
         .fish-item.timeline-left {
             left: 0;
             padding-right: 25px;
@@ -286,35 +292,36 @@
             left: 5px;
         }
 
-        /* 雪花动画样式 - 改为蓝白色 */
+        /* 蓝白色雪花样式 */
         .snowflake {
             position: absolute;
             background: linear-gradient(135deg, #ffffff, #b3d9ff, #99ccff);
             border-radius: 50%;
             box-shadow: 0 0 3px rgba(102, 170, 255, 0.7);
+            opacity: 0.8;
             animation: fall linear infinite;
         }
 
+        /* 雪花飘动动画，带水平偏移 */
         @keyframes fall {
-            0% { transform: translateY(-10px) rotate(0deg); }
-            100% { transform: translateY(100vh) rotate(360deg); }
+            0% { transform: translateY(-10px) translateX(0) rotate(0deg); }
+            100% { transform: translateY(100vh) translateX(var(--x-offset, 0)) rotate(360deg); }
         }
 
         @media (max-width: 768px) {
             .container { flex-direction: column-reverse; }
             .left { width: 100%; }
-            .fish-item { width: 100% !important; text-align: left !important; padding: 0 10px 0 30px !important; left: 0 !important; }
+            .fish-item { width: 100% !important; text-align: left !important; padding: 0 0 0 30px !important; left: 0 !important; }
             .fish-item::after { display: none; }
         }
     </style>
 </head>
-
 <body>
-    <!-- 全局雪花 -->
+    <!-- 全局雪花容器 -->
     <div class="snow" id="snow"></div>
     
     <header>
-        <!-- 标题框内部雪花 -->
+        <!-- 标题栏内部雪花容器 -->
         <div class="snow-inner" id="headerSnow"></div>
         <h1>❄️ 雪人的世界 ❄️</h1>
     </header>
@@ -322,7 +329,7 @@
     <div class="container">
         <div class="left">
             <div class="avatar">
-                <!-- 增加加载失败兜底图 -->
+                <!-- 图片加载失败兜底 -->
                 <img src="Passport.jpg" alt="头像" onerror="this.src='https://picsum.photos/200/200?random=1'">
             </div>
             <div class="side-box">
@@ -390,59 +397,60 @@
     </div>
 
     <script>
-       // 雪花生成函数
-function createSnow(containerId, count, isHeader = false) {
-    const container = document.getElementById(containerId);
-    for (let i = 0; i < count; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.classList.add('snowflake');
-        
-        // 随机大小
-        const size = isHeader ? Math.random() * 4 + 1 : Math.random() * 6 + 2;
-        snowflake.style.width = `${size}px`;
-        snowflake.style.height = `${size}px`;
-        
-        // 随机位置
-        snowflake.style.left = `${Math.random() * 100}%`;
-        
-        // 随机透明度 0.6-0.9 增强层次感
-        snowflake.style.opacity = Math.random() * 0.3 + 0.6;
+        // 雪花生成函数
+        function createSnow(containerId, count, isHeader = false) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < count; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                
+                // 随机大小
+                const size = isHeader ? Math.random() * 4 + 1 : Math.random() * 6 + 2;
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+                
+                // 随机位置
+                snowflake.style.left = `${Math.random() * 100}%`;
+                
+                // 随机透明度
+                snowflake.style.opacity = Math.random() * 0.3 + 0.6;
 
-        // 新增：随机水平偏移，模拟雪花左右飘动效果，标题栏内偏移更小更自然
-        const xOffset = (Math.random() - 0.5) * (isHeader ? 50 : 120);
-        snowflake.style.setProperty('--x-offset', `${xOffset}px`);
-        
-        // 随机下落速度
-        const duration = isHeader ? Math.random() * 8 + 5 : Math.random() * 10 + 8;
-        snowflake.style.animationDuration = `${duration}s`;
-        
-        // 随机延迟
-        snowflake.style.animationDelay = `${Math.random() * 10}s`;
-        
-        container.appendChild(snowflake);
-    }
-}
+                // 随机水平偏移，模拟雪花飘动效果
+                const xOffset = (Math.random() - 0.5) * (isHeader ? 50 : 120);
+                snowflake.style.setProperty('--x-offset', `${xOffset}px`);
+                
+                // 随机下落速度
+                const duration = isHeader ? Math.random() * 8 + 5 : Math.random() * 10 + 8;
+                snowflake.style.animationDuration = `${duration}s`;
+                
+                // 随机延迟
+                snowflake.style.animationDelay = `${Math.random() * 10}s`;
+                
+                container.appendChild(snowflake);
+            }
+        }
 
-// 页面加载完成后执行
-window.onload = function() {
-    createSnow('snow', 50); // 全局雪花50片
-    createSnow('headerSnow', 20, true); // 标题栏雪花20片
-    // 新增：默认展开第一个内容板块，避免打开页面全是空白
-    document.querySelector('.book-content').style.display = 'block';
-};
+        // 页面加载完成后执行
+        window.onload = function() {
+            // 生成雪花：全局50片，标题栏20片
+            createSnow('snow', 50);
+            createSnow('headerSnow', 20, true);
+            // 默认展开第一个板块，加点击高亮状态
+            const firstTitle = document.querySelector('.main h2');
+            const firstContent = firstTitle.nextElementSibling;
+            firstTitle.classList.add('active');
+            firstContent.style.display = 'block';
+        };
 
-// 折叠功能优化
-function toggleBook(element) {
-    const content = element.nextElementSibling;
-    const isOpen = content.style.display === "block";
-    content.style.display = isOpen ? "none" : "block";
-
-// 可选：手风琴模式（展开当前时自动关闭其他面板），需要的话取消注释即可
-  if (!isShow) {
-                 document.querySelectorAll('.book-content').forEach(item => {
-                     if (item !== content) item.style.display = 'none';
-                 });
-             }
+        // 折叠面板交互函数
+        function toggleBook(element) {
+            const content = element.nextElementSibling;
+            const isShow = content.style.display === 'block';
+            // 切换显示状态
+            content.style.display = isShow ? 'none' : 'block';
+            // 切换点击高亮状态
+            element.classList.toggle('active', !isShow);
+        }
     </script>
 </body>
-</html>              
+</html>
