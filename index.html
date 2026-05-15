@@ -165,22 +165,23 @@ body {
             padding-left: 18px;
         }
 
-        .book-content {
-            display: none;
-            padding: 10px 0 40px;
-            margin-bottom: 30px;
-            animation: openBook 0.4s ease;
-            min-height: 400px; /* 固定最小高度，避免内容看不见 */
-            background: rgba(255,255,255,0.4);
-            border-radius: 8px;
-        }
+      .book-content {
+    display: none;
+    padding: 10px 0 40px;
+    margin-bottom: 30px;
+    animation: openBook 0.4s ease;
+    min-height: 400px;
+    /* 把半透背景改成纯白/和你鱼骨底色一致的颜色，白边完全消失 */
+    background: #ffffff;
+    border-radius: 8px;
+}
 
         @keyframes openBook {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-     /* 替换所有鱼骨相关CSS ↓ */
+  /* 替换所有鱼骨相关CSS ↓ */
 .fish-timeline {
     position: relative;
     width: 100%;
@@ -188,26 +189,31 @@ body {
     margin: 0 auto;
     padding: 40px 10px 80px;
     z-index: 10;
-    min-height: 580px; /* 保证鱼骨完整显示，内容多可以自己调大 */
-    /* 核心：手绘鱼骨作为背景 */
-    background: url("hand fish.png") no-repeat center top;
-    background-size: auto 100%; /* 高度自适应，不拉伸变形 */
+    min-height: 580px;
+    /* 先把文件名空格改成下划线/横杠，避免路径识别错误：把hand fish.png改成hand_fish.png */
+    background: url("hand_fish.png") no-repeat center top;
+    background-size: auto 100%;
+    /* 核心：消白边+背景融合 */
+    mix-blend-mode: multiply; /* 白色部分自动融入下层背景，蓝色鱼骨完全保留 */
+    filter: contrast(1.1) brightness(1.05); /* 蓝色更饱和，压掉淡白边，要更自然可以加个0.2px微模糊：blur(0.2px) */
+    background-color: transparent;
 }
 
-/* 原来的CSS生成的鱼骨全部隐藏，不用改HTML */
+/* 隐藏原有CSS生成的鱼骨 */
 .fish-head, .fish-body, .fish-tail {
     display: none !important;
 }
 
 .fish-item {
     position: relative;
-    margin: 36px 0; /* 上下间距，和鱼骨齿对齐，不合适可以自己微调数值 */
+    margin: 36px 0;
     width: 45%;
     font-size: 15px;
     line-height: 1.6;
     z-index: 12;
-    /* 选加：换成手写字体更搭，不需要就删掉这行 */
     font-family: "ZCOOL KuaiLe", "Ma Shan Zheng", "Marker Felt", sans-serif;
+    /* 文字不受混合模式影响，单独设置 */
+    mix-blend-mode: normal;
 }
 
 .fish-item.timeline-left {
@@ -217,11 +223,10 @@ body {
 }
 
 .fish-item.timeline-right {
-    left: 55%; /* 右边文字向右挪一点，和鱼骨齿对齐 */
+    left: 55%;
     padding-left: 10px;
 }
 
-/* 手绘箭头，和你手账里的样式一致 */
 .fish-item::after {
     content: "➤";
     position: absolute;
@@ -229,15 +234,38 @@ body {
     color: #165DFF;
     font-weight: bold;
     font-size: 14px;
+    mix-blend-mode: normal;
 }
 
 .fish-item.timeline-left::after {
     right: -16px;
-    transform: scaleX(-1); /* 左边箭头朝右 */
+    transform: scaleX(-1);
 }
 
 .fish-item.timeline-right::after {
     left: -16px;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .container { flex-direction: column-reverse; }
+    .left { width: 100%; }
+    .fish-timeline {
+        background-size: 60% auto;
+        background-position: 80% top;
+        min-height: auto;
+    }
+    .fish-item {
+        width: 100% !important;
+        left: 0 !important;
+        text-align: left !important;
+        padding: 0 0 0 40px !important;
+        margin: 28px 0 !important;
+    }
+    .fish-item::after {
+        left: 10px !important;
+        transform: none !important;
+    }
 }
 
 /* 移动端适配 */
@@ -274,13 +302,6 @@ body {
         @keyframes fall {
             0% { transform: translateY(-10px) translateX(0) rotate(0deg); }
             100% { transform: translateY(100vh) translateX(var(--x-offset, 0)) rotate(360deg); }
-        }
-
-        @media (max-width: 768px) {
-            .container { flex-direction: column-reverse; }
-            .left { width: 100%; }
-            .fish-item { width: 100% !important; text-align: left !important; padding: 0 0 0 30px !important; left: 0 !important; }
-            .fish-item::after { display: none; }
         }
     </style>
 </head>
